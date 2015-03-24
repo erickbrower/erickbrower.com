@@ -1,33 +1,35 @@
 var path = require('path'),
-    rootPath = path.normalize(__dirname + '/..'),
-    env = process.env.NODE_ENV || 'development';
+  rootPath = path.normalize(__dirname + '/..'),
+  env = process.env.NODE_ENV || 'development';
+
+var appName = 'thing';
 
 var config = {
   development: {
     root: rootPath,
     app: {
-      name: 'thing'
+      name: appName
     },
     port: 3000,
-    db: 'mongodb://localhost/thing-development'
+    db: 'mongodb://localhost/' + appName +'-development'
   },
 
   test: {
     root: rootPath,
     app: {
-      name: 'thing'
+      name: appName
     },
     port: 3000,
-    db: 'mongodb://localhost/thing-test'
+    db: 'mongodb://localhost/' + appName +'-test'
   },
 
   production: {
     root: rootPath,
     app: {
-      name: 'thing'
+      name: appName
     },
     port: 3000,
-    db: 'mongodb://localhost/thing-production'
+    db: 'mongodb://localhost/' + appName +'-production'
   }
 };
 
