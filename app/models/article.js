@@ -1,10 +1,9 @@
-// Example model
-
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
   title: String,
+  slug: String,
   url: String,
   text: String
 });
