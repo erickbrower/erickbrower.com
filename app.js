@@ -1,5 +1,5 @@
 var express = require('express'),
-  config = require('./config/config'),
+  config = require('./config/config')[process.env.NODE_ENV || 'development'],
   glob = require('glob'),
   mongoose = require('mongoose');
 
@@ -17,4 +17,4 @@ var app = express();
 
 require('./config/express')(app, config);
 
-app.listen(config.port);
+module.exports = app;

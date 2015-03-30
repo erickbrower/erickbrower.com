@@ -4,7 +4,6 @@ var mongoose = require('mongoose'),
 var ArticleSchema = new Schema({
   title: String,
   slug: String,
-  url: String,
   text: String
 });
 
@@ -14,4 +13,3 @@ ArticleSchema.virtual('date')
   });
 
 mongoose.model('Article', ArticleSchema);
-
