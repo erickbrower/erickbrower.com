@@ -6,32 +6,19 @@ var request = require('supertest'),
   Article = mongoose.model('Article'),
   _ = require('lodash'),
   async = require('async'),
+  factories = require('../../factories'),
   assert = require('assert');
 
-var testArticles = [{
-  title: 'Test Post 1',
-  slug: 'test-post-1',
-  text: 'This is a test post!'
-}, {
-  title: 'Test Post 2',
-  slug: 'test-post-2',
-  text: 'This is another test post'
-}, {
-  title: 'Test Post 3',
-  slug: 'test-post-3',
-  text: 'This is yet another test post'
-}];
+describe('/api/articles', function() {
 
-describe('app', function() {
-
-  describe('GET /api/articles', function() {
+  describe('GET', function() {
 
     beforeEach(function(done) {
-      var callbacks = _.map(testArticles, function(article) {
+      var callbacks = _.map(factories.article.build(10), function(article) {
         return function(next) {
-          Article.create(article, function(err, newArticle) {
-            if (err) throw err;
-            next(null, newArticle);
+          Article.create(article, function(err) {
+            if(err) return next(err);
+            next();
           });
         };
       });
@@ -49,10 +36,21 @@ describe('app', function() {
         .expect(200)
         .end(function(err, response) {
             if (err) return done(err);
-            assert.ok(response.body.length === 3);
+            assert.ok(response.body.length === 10);
             done();
         });
     });
 
+    it('should paginate with page and per_page params');
+  });
+
+  describe('POST', function() {
+    it('should create a new article');
+  });
+});
+
+describe('/api/articles/:id', function() {
+  describe('GET', function() {
+    it('should return the article by id');
   });
 });

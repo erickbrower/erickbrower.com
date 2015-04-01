@@ -25,7 +25,13 @@ router.route('/')
       }
     });
   }).post(function(req, res) {
-    //Create an article
+      Article.create(req.params, function(err, article) {
+        if (err) {
+          res.sendStatus(400);
+        } else {
+          res.json(article);
+        }
+      });
   });
 
 router.route('/:id')
