@@ -52,6 +52,7 @@ describe('/api/articles', function () {
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (err, response) {
+          if (err) return done(err);
           assert.ok(response.body.length === 2);
           done();
         });
@@ -59,12 +60,87 @@ describe('/api/articles', function () {
   });
 
   describe('POST', function () {
-    it('should create a new article');
+    it('should create a new article', function (done) {
+      var testArticle = factories.article.build();
+      request(app)
+        .post('/api/articles')
+        .set('Accept', 'application/json')
+        .send(testArticle)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, response) {
+          if (err) return done(err);
+          assert.ok(response.body.createdAt);
+          assert.equal(response.body.title, testArticle.title);
+          done();
+        });
+    });
   });
 });
 
 describe('/api/articles/:id', function () {
+  var testArticle;
+
+  beforeEach(function (done) {
+    Article.create(factories.article.build(), function (err, article) {
+      if (err) return done(err);
+      testArticle = article;
+      done();
+    });
+  });
+
   describe('GET', function () {
-    it('should return the article by id');
+    it('should return the article by id', function (done) {
+      request(app)
+        .get('/api/articles/' + testArticle.id)
+        .set('Accept', 'application/json')
+        .send(testArticle)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, response) {
+          if (err) return done(err);
+          assert.ok(response.body.createdAt);
+          assert.equal(response.body.title, testArticle.title);
+          done();
+        });
+    });
+  });
+
+  describe('PUT', function () {
+    it('should update the article by id', function (done) {
+      var newTitle = 'Updated Test Article';
+      request(app)
+        .put('/api/articles/' + testArticle.id)
+        .set('Accept', 'application/json')
+        .send({
+          title: newTitle
+        })
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, response) {
+          if (err) return done(err);
+          assert.ok(response.body.createdAt);
+          assert.equal(response.body.title, newTitle);
+          done();
+        });
+    });
+  });
+
+  describe('DELETE', function () {
+    it('should delete the article by id', function (done) {
+      request(app)
+        .del('/api/articles/' + testArticle.id)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err) {
+          if (err) return done(err);
+          Article.findById(testArticle.id, function (err, article) {
+            assert.ok(err === null);
+            assert.ok(article === null);
+            done();
+          });
+        });
+    });
   });
 });
