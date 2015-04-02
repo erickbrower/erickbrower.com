@@ -4,12 +4,10 @@ var mongoose = require('mongoose'),
 var ArticleSchema = new Schema({
   title: String,
   slug: String,
-  text: String
+  text: String,
+  state: String,
+  createdAt: {type: Date, default: Date.now},
+  updatedAt: {type: Date, default: Date.now}
 });
-
-ArticleSchema.virtual('date')
-  .get(function(){
-    return this._id.getTimestamp();
-  });
 
 mongoose.model('Article', ArticleSchema);
