@@ -1,8 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 var mongoose = require('mongoose'),
-  config = require('../config/config')[process.env.NODE_ENV],
-  glob = require('glob');
+  config = require('../config/config');
 
 beforeEach(function (done) {
 

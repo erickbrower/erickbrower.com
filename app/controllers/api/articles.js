@@ -2,14 +2,13 @@ var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
   Article = mongoose.model('Article'),
-  config = require('../../../config/config')[process.env.NODE_ENV || 'development'];
+  config = require('../../../config/config');
 
 module.exports = function (app) {
   app.use('/api/articles', router);
 };
 
 router.param('article_id', function (req, res, next, articleId) {
-  //Get article by id or slug
   Article.findById(articleId, function (err, article) {
     if (err) {
       next(err);
@@ -24,7 +23,6 @@ router.param('article_id', function (req, res, next, articleId) {
 
 router.route('/')
   .get(function (req, res) {
-    //Paginate all articles
     var query = Article.find(),
       limit = req.query.limit ? parseInt(req.query.limit) : config.app.paginationLimit,
       page = req.query.page ? parseInt(req.query.page) : 1,
@@ -72,4 +70,3 @@ router.route('/:article_id')
       }
     });
   });
-

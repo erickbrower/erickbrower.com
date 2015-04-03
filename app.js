@@ -1,5 +1,5 @@
 var express = require('express'),
-  config = require('./config/config')[process.env.NODE_ENV || 'development'],
+  config = require('./config/config'),
   glob = require('glob'),
   mongoose = require('mongoose');
 

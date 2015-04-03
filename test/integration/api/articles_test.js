@@ -53,7 +53,7 @@ describe('/api/articles', function () {
         .expect(200)
         .end(function (err, response) {
           if (err) return done(err);
-          assert.ok(response.body.length === 2);
+          assert.equal(response.body.length, 2);
           done();
         });
     });
