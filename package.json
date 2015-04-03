@@ -6,6 +6,10 @@
     "start": "node run.js",
     "test": "node_modules/.bin/mocha -w"
   },
+  "engines": {
+    "node": "0.12.x",
+    "npm": "2.7.3"
+  },
   "dependencies": {
     "async": "^0.9.0",
     "backbone.marionette": "^2.4.1",
