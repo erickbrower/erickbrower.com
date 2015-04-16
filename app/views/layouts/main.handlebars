@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{siteDescription}}">
-    <meta name="author" content="{{siteAuthor}}">
+    <meta name="description" content="@erickbrower's personal blog.">
+    <meta name="author" content="@erickbrower">
 
-    <title>{{siteTitle}}</title>
+    <title>erickbrower</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,17 +18,10 @@
 </head>
 
 <body>
-
-{{{body}}}
-
-<div class="blog-footer">
-    <p>
-        Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.
-    </p>
-
-    <p>
-        <a href="#">Back to top</a>
-    </p>
+<div class="container">
+    {{> header}}
+    {{{body}}}
 </div>
+{{> footer}}
 </body>
 </html>

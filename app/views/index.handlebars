@@ -1,13 +1,10 @@
-<div class="container">
-    {{> header}}
-    <div class="row">
-        <div class="col-sm-8 blog-main">
-            {{#each posts}}
-                {{> post}}
-            {{/each}}
-        </div>
-        <!-- /.blog-main -->
+<div class="row">
+    <div class="col-sm-8 blog-main">
+        {{#each posts}}
+            {{> post}}
+        {{/each}}
     </div>
-    <!-- /.row -->
+    <!-- /.blog-main -->
+    {{> sidebar}}
 </div>
-<!-- /.container -->
+<!-- /.row -->
