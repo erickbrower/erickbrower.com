@@ -1,13 +1,15 @@
-var factories = require('node-factories');
+var factories = require('node-factories'),
+  Article = require('../app/models/article');
 
 factories.define('article', {
-  body: 'Now is the time for all good men to come to the ' +
+  text: 'Now is the time for all good men to come to the ' +
   'aid of their country.',
-  title: 'Test Article',
-  state: 'draft'
+  createdAt: function () {
+    return new Date();
+  }
 })
-  .sequence('slug', function (i) {
-    return 'test-article-' + i;
+  .sequence('title', function (i) {
+    return 'Test Article ' + i;
   });
 
 module.exports = factories;

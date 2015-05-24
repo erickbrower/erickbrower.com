@@ -3,18 +3,13 @@ var gulp = require('gulp'),
   livereload = require('gulp-livereload'),
   sass = require('gulp-sass');
 
-gulp.task('assets:bower', function () {
-  gulp.src('./app/assets/bower_components');
-});
-
-gulp.task('assets:watch', function() {
-  gulp.watch('./public/css/*.scss', ['sass']);
-});
+var paths = {
+  js: ['app/assets/js/**/*.js']
+};
 
 gulp.task('develop', function() {
   livereload.listen();
   nodemon({
-    script: 'run.js',
     ext: 'js handlebars'
   }).on('restart', function() {
     setTimeout(function() {
@@ -24,8 +19,5 @@ gulp.task('develop', function() {
 });
 
 gulp.task('default', [
-  'assets:sass',
-  'assets:js',
-  'develop',
-  'assets:watch'
+  'develop'
 ]);

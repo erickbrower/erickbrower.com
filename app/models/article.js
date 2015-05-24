@@ -10,4 +10,16 @@ var ArticleSchema = new Schema({
   updatedAt: {type: Date, default: Date.now}
 });
 
-mongoose.model('Article', ArticleSchema);
+ArticleSchema.pre('save', function (next) {
+  if (!this.slug) {
+    this.slug = this.title
+      .toLowerCase()
+      .replace(/[^\w ]+/g, '')
+      .replace(/ +/g, '-');
+  }
+  next();
+});
+
+var Article = mongoose.model('Article', ArticleSchema);
+Article.schema.path('title').required(true);
+Article.schema.path('text').required(true);

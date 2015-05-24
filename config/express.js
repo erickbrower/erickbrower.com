@@ -1,13 +1,12 @@
-var express = require('express');
-var glob = require('glob');
-
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var compress = require('compression');
-var methodOverride = require('method-override');
-var exphbs  = require('express-handlebars');
+var express = require('express'),
+  glob = require('glob'),
+  logger = require('morgan'),
+  cookieParser = require('cookie-parser'),
+  bodyParser = require('body-parser'),
+  compress = require('compression'),
+  methodOverride = require('method-override'),
+  exphbs = require('express-handlebars'),
+  session = require('express-session');
 
 module.exports = function(app, config) {
   app.engine('handlebars', exphbs({
@@ -32,6 +31,13 @@ module.exports = function(app, config) {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
+  app.use(session({
+    secret: "blah",
+    name: "thing",
+    resave: false,
+    saveUninitialized: true
+  }));
+  app.use(require('flash')());
 
   var controllers = glob.sync(config.root + '/app/controllers/**/*.js');
   controllers.forEach(function (controller) {
@@ -45,7 +51,7 @@ module.exports = function(app, config) {
   });
   
   if(app.get('env') === 'development'){
-    app.use(function (err, req, res, next) {
+    app.use(function (err, req, res) {
       res.status(err.status || 500);
       res.render('error', {
         message: err.message,
@@ -55,7 +61,7 @@ module.exports = function(app, config) {
     });
   }
 
-  app.use(function (err, req, res, next) {
+  app.use(function (err, req, res) {
     res.status(err.status || 500);
       res.render('error', {
         message: err.message,

@@ -22,7 +22,7 @@ describe('/api/articles', function () {
           });
         };
       });
-      async.parallel(callbacks, function (err) {
+      async.series(callbacks, function (err) {
         if (err) throw err;
         done();
       });
@@ -47,13 +47,13 @@ describe('/api/articles', function () {
         .set('Accept', 'application/json')
         .query({
           limit: 4,
-          page: 3
+          page: 2
         })
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (err, response) {
           if (err) return done(err);
-          assert.equal(response.body.length, 2);
+          assert.equal(response.body.length, 4);
           done();
         });
     });
@@ -92,7 +92,7 @@ describe('/api/articles/:id', function () {
   describe('GET', function () {
     it('should return the article by id', function (done) {
       request(app)
-        .get('/api/articles/' + testArticle.id)
+        .get('/api/articles/' + testArticle._id)
         .set('Accept', 'application/json')
         .send(testArticle)
         .expect('Content-Type', /json/)
@@ -129,7 +129,7 @@ describe('/api/articles/:id', function () {
   describe('DELETE', function () {
     it('should delete the article by id', function (done) {
       request(app)
-        .del('/api/articles/' + testArticle.id)
+        .del('/api/articles/' + testArticle._id)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200)
