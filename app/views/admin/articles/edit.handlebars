@@ -1,25 +1,34 @@
+{{#if errors}}
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            {{#each errors}}
+                <li>{{this.message}}</li>
+            {{/each}}
+        </ul>
+    </div>
+{{else}}
+    {{#if success}}
+        <div class="alert alert-success" role="alert">
+            Created the article successfully!
+        </div>
+    {{/if}}
+{{/if}}
+
 <div class="container">
     <div class="col-sm-8 blog-main">
         <h2>Write Something </h2>
 
         <form class="form-horizontal" action="/admin/articles/{{article.slug}}/new" method="post">
             <div class="form-group">
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="input-title" placeholder="My Awesome Post!"
-                           value="{{article.title}}">
-                </div>
+                <input type="text" class="form-control" id="input-title" name="title" placeholder="My Awesome Post!"
+                       value="{{article.title}}">
             </div>
             <div class="form-group">
-                <div class="col-sm-12">
-                    <textarea class="form-control" id="input-text" style="height: 400px">
-                        {{article.text}}
-                    </textarea>
-                </div>
+                <textarea class="form-control" id="input-text" name="text"
+                          style="height: 400px">{{article.text}}</textarea>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-12">
-                    <button type="submit" class="btn btn-default">Save</button>
-                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
             </div>
         </form>
     </div>

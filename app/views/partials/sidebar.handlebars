@@ -1,13 +1,20 @@
-<div class="col-sm-4 blog-sidebar">
-    <div class="sidebar-module sidebar-module-inset">
-        {{> search_form}}
-    </div>
-    <div class="sidebar-module">
-        <h4>Elsewhere</h4>
-        <ol class="list-unstyled">
-            <li><a href="http://github.com/erickbrower">GitHub</a></li>
-            <li><a href="http://twitter.com/erickbrower">Twitter</a></li>
-        </ol>
-    </div>
+<div class="sidebar-module sidebar-module-inset" style="margin-top: 43px">
+    {{> search_form}}
+</div>
+<div class="sidebar-module">
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active"><a href="#">home</a></li>
+        <li role="presentation"><a href="#">code</a></li>
+        <li role="presentation"><a href="#">cooking</a></li>
+        <li role="presentation"><a href="#">bikes</a></li>
+        <li role="presentation"><a href="/admin/articles/new">admin</a></li>
+    </ul>
+</div>
+<div class="sidebar-module">
+    <h4>Elsewhere</h4>
+    <ol class="list-unstyled">
+        <li><a href="http://github.com/erickbrower">GitHub</a></li>
+        <li><a href="http://twitter.com/erickbrower">Twitter</a></li>
+    </ol>
 </div>
 <!-- /.blog-sidebar -->

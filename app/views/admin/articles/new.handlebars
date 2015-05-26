@@ -1,23 +1,27 @@
-<div class="container">
-    <div class="col-sm-8 blog-main">
-        <h2>Write Something </h2>
+<h2>Write Something </h2>
+{{#if errors}}
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            {{#each errors}}
+                <li>{{this.message}}</li>
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}
 
+<div class="row">
+    <div class="col-md-12">
         <form class="form-horizontal" action="/admin/articles/new" method="post">
             <div class="form-group">
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="input-title" placeholder="My Awesome Post!">
-                </div>
+                <input type="text" class="form-control" id="input-title" name="title" placeholder="My Awesome Post!">
             </div>
             <div class="form-group">
-                <div class="col-sm-12">
-                    <textarea class="form-control" id="input-text" style="height: 400px"></textarea>
-                </div>
+                <textarea class="form-control" id="input-text" name="text" style="height: 400px"></textarea>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-12">
-                    <button type="submit" class="btn btn-default">Save</button>
-                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
             </div>
         </form>
     </div>
 </div>
+

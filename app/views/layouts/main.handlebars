@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="@erickbrower's personal blog.">
+    <meta name="description" content="@erickbrower's personal blog about nonsense.">
     <meta name="author" content="@erickbrower">
 
     <title>erickbrower</title>
@@ -18,9 +18,38 @@
 </head>
 
 <body>
+<div class="blog-masthead">
+    <div class="container">
+        <nav class="blog-nav">
+            <a class="blog-nav-item active" href="#">Home</a>
+            <a class="blog-nav-item" href="#">New features</a>
+            <a class="blog-nav-item" href="#">Press</a>
+            <a class="blog-nav-item" href="#">New hires</a>
+            <a class="blog-nav-item" href="#">About</a>
+        </nav>
+    </div>
+</div>
 <div class="container">
-    {{> header}}
-    {{{body}}}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="blog-header">
+                {{> header}}
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="blog-main">
+                {{{body}}}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="blog-sidebar">
+                {{> sidebar}}
+            </div>
+        </div>
+    </div>
 </div>
 {{> footer}}
 </body>

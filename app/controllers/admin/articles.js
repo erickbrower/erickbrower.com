@@ -7,8 +7,8 @@ module.exports = function (app) {
   app.use('/admin/articles', router);
 };
 
-router.param('slug', function (req, res, next, slug) {
-  Article.find({slug: slug}, function (err, article) {
+router.param('article_id', function (req, res, next, articleId) {
+  Article.findById(articleId, function (err, article) {
     if (err) {
       next(err);
     } else if (!article) {
@@ -29,17 +29,17 @@ router.route('/new')
       if (err) {
         res.flash('error', 'Errors were generated while saving this article');
         res.render('admin/articles/new', {
-          errors: err,
+          errors: err.errors,
           article: req.body
         });
       } else {
         res.flash('success', 'Created a new article!');
-        res.redirect('/admin/articles/' + article.slug + '/edit');
+        res.redirect('/admin/articles/' + article._id + '/edit');
       }
     });
   });
 
-router.route('/:slug/edit')
+router.route('/:article_id/edit')
   .get(function (req, res) {
     res.render('admin/articles/edit', {
       article: req.article
