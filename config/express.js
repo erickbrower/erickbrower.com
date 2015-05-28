@@ -8,11 +8,13 @@ var express = require('express'),
   exphbs = require('express-handlebars'),
   session = require('express-session');
 
+
 module.exports = function(app, config) {
   app.engine('handlebars', exphbs({
     layoutsDir: config.root + '/app/views/layouts/',
     defaultLayout: 'main',
-    partialsDir: [config.root + '/app/views/partials/']
+    partialsDir: [config.root + '/app/views/partials/'],
+    helpers: require(config.root + '/app/views/helpers')
   }));
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'handlebars');

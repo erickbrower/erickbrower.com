@@ -3,7 +3,6 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
   twitterId: String,
-  username: String,
   email: String,
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now}

@@ -2,7 +2,7 @@ var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
   Article = mongoose.model('Article'),
-  config = require('../../../config/config');
+  handlers = require('../../handlers');
 
 module.exports = function (app) {
   app.use('/api/articles', router);
@@ -23,19 +23,11 @@ router.param('article_id', function (req, res, next, articleId) {
 
 router.route('/')
   .get(function (req, res) {
-    var query = Article.find(),
-      limit = req.query.limit ? parseInt(req.query.limit) : config.app.paginationLimit,
-      page = req.query.page ? parseInt(req.query.page) : 1,
-      sort = req.query.sort || 'createdAt',
-      skip = page > 1 ? (page - 1) * limit : 0;
-    query.sort(sort);
-    query.limit(limit);
-    query.skip(skip);
-    query.exec(function (err, results) {
+    handlers.articles.getArticlesByPage(req.query, function (err, articles) {
       if (err) {
         res.sendStatus(400);
       } else {
-        res.json(results);
+        res.json(articles);
       }
     });
   }).post(function (req, res) {

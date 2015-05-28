@@ -6,6 +6,7 @@ var ArticleSchema = new Schema({
   slug: String,
   text: String,
   state: String,
+  category: String,
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now}
 });
@@ -16,6 +17,20 @@ ArticleSchema.pre('save', function (next) {
       .toLowerCase()
       .replace(/[^\w ]+/g, '')
       .replace(/ +/g, '-');
+  }
+  next();
+});
+
+ArticleSchema.pre('save', function (next) {
+  if (!this.category) {
+    this.category = 'uncategorized';
+  }
+  next();
+});
+
+ArticleSchema.pre('save', function (next) {
+  if (!this.state) {
+    this.state = 'draft';
   }
   next();
 });

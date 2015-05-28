@@ -6,6 +6,8 @@
     "node_modules"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "lightbox": "~2.7.1",
+    "markdown-editor": "~0.1.1"
   }
 }
