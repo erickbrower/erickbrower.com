@@ -4,6 +4,8 @@ var path = require('path'),
 
 if (env.NODE_ENV === 'development') {
   require('node-env-file')(path.join(rootPath, '.env'));
+} else if (env.NODE_ENV === 'test' && !env.CI) {
+  require('node-env-file')(path.join(rootPath, '.env_test'));
 }
 
 var config = {

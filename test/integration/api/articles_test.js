@@ -22,8 +22,10 @@ describe('/api/articles', function () {
           });
         };
       });
-      async.series(callbacks, function (err) {
-        if (err) throw err;
+      async.parallel(callbacks, function (err) {
+        if (err) {
+          return done(err);
+        }
         done();
       });
     });
