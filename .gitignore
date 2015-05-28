@@ -5,3 +5,4 @@ npm-debug.log
 .idea
 .env_development
 .env_test
+public/bower_components
