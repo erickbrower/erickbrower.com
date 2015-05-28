@@ -9,6 +9,3 @@ machine:
     NODE_ENV: test
     CIRCLE_ENV: test
     DATABASE_URL: mongodb://localhost:27017
-
-  cache_directories:
-    - "node_modules"
